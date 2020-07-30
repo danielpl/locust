@@ -13,15 +13,11 @@
 # limitations under the License.
 
 
-# Start with a base Python 3.7 alpine image
-FROM python:3.7-alpine
+# Start with a base Python 3.8 image
+FROM python:3.8.0
 
 COPY requirements.txt requirements.txt
-RUN apk --no-cache add --virtual=.build-dep \
-      build-base \
-    && apk --no-cache add bash g++ zeromq-dev libffi-dev \
-    && pip install -r requirements.txt \
-    && apk del .build-dep
+RUN pip install -r requirements.txt
 
 # COPY licenses, sample tasks and entrypoint into root
 COPY app /
